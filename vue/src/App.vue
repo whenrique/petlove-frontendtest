@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Search v-on:search-cep="fetchAddress" :error="error" />
+    <Search v-on:search-cep="fetchAddress" v-on:clean-error="cleanError" :error="error" />
     <Address :address="address" />
   </div>
 </template>
@@ -23,7 +23,9 @@ export default {
     }
   },
   methods: {
-    async fetchAddress (searchedCEP) {
+    async fetchAddress ({ cep: searchedCEP, $v }) {
+      $v.$touch()
+      if ($v.$invalid) return
       try {
         const {
           cep,
@@ -51,6 +53,9 @@ export default {
         }
         return error
       }
+    },
+    cleanError () {
+      this.error = null
     }
   }
 }

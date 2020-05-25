@@ -1,12 +1,21 @@
 <template>
-  <form action="POST" class="form__wrapper" @submit.prevent="$emit('search-cep', cep)">
-    <input type="text" name="cep" id="cep" placeholder="00000-000" class="form__input" v-model.trim="cep">
+  <form
+    action="POST"
+    class="form__wrapper"
+    @submit.prevent="$emit('search-cep', { cep, $v })"
+  >
+    <input type="text" name="cep" id="cep" placeholder="00000-000" class="form__input" v-model.lazy="$v.cep.$model" @input="$emit('clean-error', null)">
     <button type="submit" class="form__button">Buscar CEP</button>
     <p class="form__message form__message--error" v-if="error">{{ error.message }}</p>
+    <p class="form__message form__message--error" v-if="!$v.cep.checkCEP">{{ invalidCEP }}</p>
+    <p class="form__message form__message--error" v-if="!$v.cep.required && $v.cep.$error">{{ requiredCEP }}</p>
   </form>
 </template>
 
 <script>
+import { required, helpers } from 'vuelidate/lib/validators'
+import { MESSAGES, CEP_REGEX } from '../../utils/constants'
+const checkCEP = helpers.regex('cep', CEP_REGEX)
 export default {
   name: 'Search',
   data () {
@@ -20,6 +29,20 @@ export default {
       default: null
     }
   },
+  computed: {
+    invalidCEP () {
+      return MESSAGES.INVALID_CEP
+    },
+    requiredCEP () {
+      return MESSAGES.REQUIRED
+    }
+  },
+  validations: {
+    cep: {
+      required,
+      checkCEP
+    }
+  }
 }
 </script>
 
