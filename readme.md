@@ -18,6 +18,6 @@ $ npm start
 
 ## Vue version
 
-The frontend application is built with vue too. To see it, just run into **vue-version** version and follow the steps above.
+The frontend application is built with vue too. To see it, just run into **vue-version** branch and follow the steps above.
 
 ### Be happy!
