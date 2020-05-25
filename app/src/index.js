@@ -1,9 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
 import '@babel/polyfill'
-import App from './App'
+import Vue from 'vue'
+import Vuelidate from 'vuelidate'
+import App from './App.vue'
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-)
+Vue.use(Vuelidate)
+new Vue({
+  render: h => h(App)
+}).$mount('#app')
