@@ -4,7 +4,7 @@
     class="form__wrapper"
     @submit.prevent="$emit('search-cep', { cep, $v })"
   >
-    <input-mask mask="99999-999" type="text" name="cep" id="cep" placeholder="00000-000" class="form__input" v-model.lazy="$v.cep.$model" @input="$emit('clean-error', null)" />
+    <input-mask mask="#####-###" type="tel" name="cep" id="cep" placeholder="00000-000" class="form__input" v-model.lazy="$v.cep.$model" @input="$emit('clean-error', null)" />
     <button type="submit" class="form__button">Buscar CEP</button>
     <p class="form__message form__message--error" v-if="error">{{ error.message }}</p>
     <p class="form__message form__message--error" v-if="!$v.cep.checkCEP">{{ invalidCEP }}</p>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import InputMask from 'vue-input-mask'
+import { TheMask } from 'vue-the-mask'
 import { required, helpers } from 'vuelidate/lib/validators'
 import { MESSAGES, CEP_REGEX } from '../../utils/constants'
 const checkCEP = helpers.regex('cep', CEP_REGEX)
@@ -21,7 +21,7 @@ const checkCEP = helpers.regex('cep', CEP_REGEX)
 export default {
   name: 'Search',
   components: {
-    'input-mask': InputMask
+    'input-mask': TheMask
   },
   data () {
     return {

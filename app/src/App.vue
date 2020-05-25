@@ -47,9 +47,18 @@ export default {
         }
       } catch (error) {
         this.address = null
+        if (error.error) {
+          this.error = {
+            status: 404,
+            message: MESSAGES.NOT_FOUND
+          }
+
+          return error
+        }
+
         this.error = {
-          status: 404,
-          message: MESSAGES.NOT_FOUND
+          status: 400,
+          message: MESSAGES.DEFAULT
         }
         return error
       }
