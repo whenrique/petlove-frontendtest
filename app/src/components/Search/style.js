@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import InputMask from 'react-input-mask'
 
 export const Form = styled.form`
   background-color: ${({ theme }) => theme.color.white};
@@ -16,7 +17,7 @@ export const Form = styled.form`
   }
 `
 
-export const Input = styled.input`
+export const Input = styled(InputMask)`
   border: 1px solid ${({ theme }) => theme.color.gallery};
   border-radius: ${({ theme }) => theme.radius}px;
   padding: ${({ theme }) => theme.padding}px;

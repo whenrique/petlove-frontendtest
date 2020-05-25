@@ -8,7 +8,7 @@ const Address = ({ address }) => (
       <s.Prefix>CEP:</s.Prefix> {address.cep}
     </s.Text>
     <s.Text>
-      <s.Prefix>Bairro:</s.Prefix> {address.bairro}
+      <s.Prefix>Estado:</s.Prefix> {address.uf}
     </s.Text>
     <s.Text>
       <s.Prefix>Cidade:</s.Prefix> {address.localidade}

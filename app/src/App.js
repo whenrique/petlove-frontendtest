@@ -29,7 +29,7 @@ const App = () => {
   }
 
   const handleCep = (postalCode) => {
-    setCep(postalCode)
+    setCep(postalCode.trim())
   }
 
   useEffect(() => {
